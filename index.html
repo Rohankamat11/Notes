@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h1 {
+        color: rgb(243, 116, 12);
+    }
+
+    textarea {
+        border: 1px solid rgb(243, 189, 12);
+    }
+
+    button {
+        margin-top: 10px;
+        font-size: 18px;
+        padding: 10px;
+        border-radius: 5px;
+        color: rgb(243, 58, 12);
+        background-color: white;
+        border: 1px solid rgb(243, 58, 12);
+
+    }
+
+    button:hover {
+        background-color: rgb(243, 58, 12);
+        color: white;
+    }
+</style>
+
+<body>
+    <center>
+
+        <h1>Notes</h1>
+        <textarea id="myInput" id="" cols="30" rows="10"></textarea>
+        <br>
+        <button onclick="clicked()">Clear All</button>
+        <ul id="demo">
+
+        </ul>
+        <h1>Previous Data</h1>
+        <div id="data">
+
+        </div>
+    </center>
+    <script>
+        var input = document.getElementById("myInput");
+        var data = document.getElementById("data");
+
+
+        data.innerHTML = localStorage.getItem("key1");
+
+        input.addEventListener("keypress", function (event) {
+            const entry = document.createElement('p');
+
+            if (event.key === "Enter") {
+
+                var text = document.getElementById("myInput");
+
+                const list = document.getElementById('demo');
+                const firstName = text.value;
+
+                entry.appendChild(document.createTextNode(firstName));
+                list.appendChild(entry);
+                data.innerHTML = list.innerHTML;
+                localStorage.setItem("key1", list.innerHTML);
+                text.value = "";
+            }
+        });
+
+        function clicked() {
+            var cond = confirm("Are you Sure ?");
+            if (cond == true) {
+
+                var input = document.getElementById("myInput");
+                const list = document.getElementById('demo');
+
+                localStorage.clear();
+                input.value = "";
+                data.innerHTML = "";
+                list.innerHTML = "";
+            } else {
+                //kuch nhi
+            }
+
+        }
+    </script>
+</body>
+
+</html>
